@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Dashboard</h1>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/predict">Predict</a> |
+      <a href="/dataset">Dataset</a> |
+      <a href="/about">About</a>
+    </nav>
+    <section>
+      <p>Total students: {{ stats.total_students }}</p>
+      <p>Average study hours: {{ stats.avg_study }}</p>
+      <p>Average previous marks: {{ stats.avg_marks }}</p>
+      <p>Average attendance: {{ stats.avg_attendance }}</p>
+      <p>Average final score: {{ stats.avg_score }}</p>
+      <p>Model accuracy: {{ metrics.accuracy }}%</p>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Predict Student Performance</title>
+  </head>
+  <body>
+    <h1>Predict Student Performance</h1>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/dashboard">Dashboard</a> |
+      <a href="/dataset">Dataset</a> |
+      <a href="/about">About</a>
+    </nav>
+
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post">
+      <label>Study Hours: <input type="number" step="0.1" name="study_hours" required></label><br>
+      <label>Previous Marks: <input type="number" step="0.1" name="previous_marks" required></label><br>
+      <label>Attendance: <input type="number" step="0.1" name="attendance" required></label><br>
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+      <h2>Prediction Result</h2>
+      <p>Predicted Score: {{ prediction.predicted_score }}</p>
+      <p>Performance: {{ prediction.performance }}</p>
+      <p>Accuracy: {{ prediction.model_accuracy }}%</p>
+      <ul>
+        {% for tip in prediction.suggestions %}
+          <li><strong>{{ tip.icon }} {{ tip.title }}:</strong> {{ tip.desc }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </body>
+</html>
