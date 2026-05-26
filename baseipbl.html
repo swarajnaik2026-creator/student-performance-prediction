@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>{% block title %}EduAI — Student Performance Prediction{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ── Animated Background ─────────────────────────────── -->
+<div class="bg-canvas">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<!-- ── Sidebar ─────────────────────────────────────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+    <span class="logo-text">Edu<span class="accent">AI</span></span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="/"         class="nav-item {% if request.endpoint=='home'         %}active{% endif %}">
+      <i class="fa-solid fa-house-chimney"></i><span>Home</span>
+    </a>
+    <a href="/predict"  class="nav-item {% if request.endpoint=='predict_page' %}active{% endif %}">
+      <i class="fa-solid fa-wand-magic-sparkles"></i><span>Predict</span>
+    </a>
+    <a href="/dashboard" class="nav-item {% if request.endpoint=='dashboard'   %}active{% endif %}">
+      <i class="fa-solid fa-chart-line"></i><span>Dashboard</span>
+    </a>
+    <a href="/dataset"  class="nav-item {% if request.endpoint=='dataset_page' %}active{% endif %}">
+      <i class="fa-solid fa-database"></i><span>Dataset</span>
+    </a>
+    <a href="/about"    class="nav-item {% if request.endpoint=='about'        %}active{% endif %}">
+      <i class="fa-solid fa-circle-info"></i><span>About</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="accuracy-badge">
+      <i class="fa-solid fa-microchip"></i>
+      <div>
+        <div class="ab-label">Model Accuracy</div>
+        <div class="ab-value">92.97%</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ── Top Navbar ───────────────────────────────────────── -->
+<header class="topbar">
+  <button class="hamburger" id="hamburger" aria-label="Toggle sidebar">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+  <div class="topbar-title">{% block page_title %}EduAI Platform{% endblock %}</div>
+  <div class="topbar-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fa-solid fa-moon" id="themeIcon"></i>
+    </button>
+    <div class="user-avatar">
+      <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+  </div>
+</header>
+
+<!-- ── Main Content ─────────────────────────────────────── -->
+<main class="main-content" id="mainContent">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <i class="fa-solid fa-brain"></i> EduAI &mdash; Student Performance Prediction System
+    </div>
+    <div class="footer-meta">
+      Built with <i class="fa-solid fa-heart" style="color:#f87171"></i> using Flask · Scikit-learn · Linear Regression
+    </div>
+    <div class="footer-copy">&copy; 2024 EduAI. Final-Year AI Project.</div>
+  </div>
+</footer>
+
+<!-- ── AI Chatbot ───────────────────────────────────────── -->
+<div class="chatbot-fab" id="chatFab" title="AI Study Assistant">
+  <i class="fa-solid fa-robot"></i>
+</div>
+<div class="chatbot-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar"><i class="fa-solid fa-robot"></i></div>
+      <div>
+        <div class="chat-name">EduAI Assistant</div>
+        <div class="chat-status"><span class="dot"></span> Online</div>
+      </div>
+    </div>
+    <button id="chatClose"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="msg-bubble">👋 Hi! I'm your AI study assistant. Ask me anything about studying, exams, or attendance!</div>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask a study question…"/>
+    <button id="chatSend"><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<!-- ── Loading overlay ──────────────────────────────────── -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <div class="loader-ring"></div>
+    <div class="loader-text">EduAI</div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>
